@@ -58,6 +58,19 @@ begin(uint8_t A1, uint8_t A0, int DRDY_pin, TwoWire &wirePort)
   MLX90393ArduinoHal *ah = &this->arduinoHal_; 
   return this->begin_with_hal(ah, A1, A0);
 }
+
+uint8_t
+MLX90393::
+begin_SPI(int CS_pin, int DRDY_pin, SPIClass &spiPort)
+{
+  this->arduinoHalSPI_.set_spiPort(&spiPort);
+  this->arduinoHalSPI_.set_CS_pin(CS_pin);
+  this->arduinoHalSPI_.set_drdy_pin(DRDY_pin);
+  MLX90393ArduinoHalSPI *ah = &this->arduinoHalSPI_; 
+  return this->begin_with_hal(ah, 0, 0);
+}
+
+
 #endif
 
 void

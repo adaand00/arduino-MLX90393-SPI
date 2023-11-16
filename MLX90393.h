@@ -9,11 +9,13 @@
 #ifndef MLX90393_H_INCLUDED
 #define MLX90393_H_INCLUDED
 
-#include "MLX90393Hal.h"
+#include "./MLX90393Hal.h"
 
 #ifdef MLX90393_ENABLE_ARDUINO
 #include "MLX90393ArduinoHal.h"
+#include "MLX90393ArduinoHalSPI.h"
 #include <Wire.h>
+#include <SPI.h>
 #endif
 
 class MLX90393
@@ -90,7 +92,8 @@ public:
   // higher-level API
   #ifdef MLX90393_ENABLE_ARDUINO
   uint8_t begin(uint8_t A1 = 0, uint8_t A0 = 0, int DRDY_pin = -1, TwoWire &wirePort = Wire);
-  #endif
+  uint8_t begin_SPI(int CS_pin, int DRDY_pin = -1, SPIClass &spiPort = SPI);
+#endif
   uint8_t begin_with_hal(MLX90393Hal *hal, uint8_t A1, uint8_t A0);
 
   // returns B (x,y,z) in uT, temperature in C
@@ -144,6 +147,7 @@ private:
 
   #ifdef MLX90393_ENABLE_ARDUINO
   MLX90393ArduinoHal arduinoHal_;
+  MLX90393ArduinoHalSPI arduinoHalSPI_;
   #endif
 
 };

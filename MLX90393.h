@@ -92,7 +92,7 @@ public:
   // higher-level API
   #ifdef MLX90393_ENABLE_ARDUINO
   uint8_t begin(uint8_t A1 = 0, uint8_t A0 = 0, int DRDY_pin = -1, TwoWire &wirePort = Wire);
-  uint8_t begin_SPI(int CS_pin, int DRDY_pin = -1, SPIClass &spiPort = SPI);
+  uint8_t begin_SPI(int CS_pin, int DRDY_pin, SPIClass &spiPort = SPI, uint32_t spiFreq = 1000000);
 #endif
   uint8_t begin_with_hal(MLX90393Hal *hal, uint8_t A1, uint8_t A0);
 

@@ -61,9 +61,9 @@ begin(uint8_t A1, uint8_t A0, int DRDY_pin, TwoWire &wirePort)
 
 uint8_t
 MLX90393::
-begin_SPI(int CS_pin, int DRDY_pin, SPIClass &spiPort)
+begin_SPI(int CS_pin, int DRDY_pin, SPIClass &spiPort, uint32_t spiFreq)
 {
-  this->arduinoHalSPI_.set_spiPort(&spiPort);
+  this->arduinoHalSPI_.set_spiPort(&spiPort, spiFreq);
   this->arduinoHalSPI_.set_CS_pin(CS_pin);
   this->arduinoHalSPI_.set_drdy_pin(DRDY_pin);
   MLX90393ArduinoHalSPI *ah = &this->arduinoHalSPI_; 

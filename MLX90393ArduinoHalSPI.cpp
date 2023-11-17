@@ -5,11 +5,15 @@
 #include "stdint.h"
 #include <Arduino.h>
 
-void MLX90393ArduinoHalSPI::set_spiPort(SPIClass *spiPort) {
-   this->spiPort_ = spiPort;
-   this->spiPort_->beginTransaction(SPISettings(100000, MSBFIRST, SPI_MODE3));
-   delay(10);
-   this->spiPort_->transfer(0x00); // Send dummy to force clock high.
+void MLX90393ArduinoHalSPI::set_spiPort(SPIClass *spiPort, uint32_t spiFreq) {
+  if (spiFreq > 10000000){
+    spiFreq = 10000000;
+  }
+
+  this->spiPort_ = spiPort;
+  this->spiPort_->beginTransaction(SPISettings(spiFreq, MSBFIRST, SPI_MODE3));
+  delay(10);
+  this->spiPort_->transfer(0x00); // Send dummy to force clock high.
 }
 
 bool MLX90393ArduinoHalSPI::transceive(const uint8_t *request, size_t request_size, uint8_t *response, size_t response_size) {

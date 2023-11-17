@@ -7,7 +7,7 @@
 
 class MLX90393ArduinoHalSPI : public MLX90393Hal {
   public:
-    void set_spiPort(SPIClass *spiPort); // SPI specific
+    void set_spiPort(SPIClass *spiPort, uint32_t spiFreq); // SPI specific
     bool transceive(const uint8_t *request, size_t request_size, uint8_t *response, size_t response_size);
     void set_drdy_pin(int pin) override;
     bool has_drdy_pin() override {return this->drdy_pin_ != -1;}
